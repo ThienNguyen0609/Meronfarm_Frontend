@@ -1,0 +1,45 @@
+.product-wrapper {
+    position: relative;
+    margin-bottom: 60px;
+    .product-list {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow: auto;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+
+    .ar-icon {
+        display: none;
+        position: absolute;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow:0 0 6px rgba(0,0,0,0.2);
+        transition: all .5s ease;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
+
+    .ar-left {
+        left: -12px;
+        top: calc(50% - 18px);
+    }
+    .ar-right {
+        right: -12px;
+        top: calc(50% - 18px);
+    }
+
+    &:hover > .ar-icon {
+        display: flex;
+    }
+}

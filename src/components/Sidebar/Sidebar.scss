@@ -1,0 +1,92 @@
+.sidebar-wrapper {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+
+    .sidebar {
+        position: absolute;
+        top: 0;
+        left: -400px;
+        width: 300px;
+        height: 100%;
+        background: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 12px;
+
+        .logo {
+            margin: 10px 0 10px 20px;
+            background: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 42px;
+                height: 42px;
+            }
+        }
+    
+        .arrow-close-icon {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            .menu-item {
+                width: 100%;
+                padding: 10px 20px;
+                margin-bottom: 5px;
+                color: #fff;
+    
+                &:hover {
+                    background-color: var(--primary-color-hover);
+                }
+            }
+        }
+    }
+
+    .slide-out {
+        animation: sidebar-show 1s ease forwards;
+    }
+
+    .slide-in {
+        animation: sidebar-hide 1s ease forwards;
+    }
+}
+
+@keyframes sidebar-hide {
+    from {
+        left: 0;
+    }
+    to {
+        left: -400px;
+    }
+}
+
+@keyframes sidebar-show {
+    from {
+        left: -400px;
+    }
+    to {
+        left: 0;
+    }
+}

@@ -1,0 +1,74 @@
+.information-wrapper {
+    .information-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+        .information-avatar {
+            width: 150px;
+            height: 150px;
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #333;
+            border-radius: 50%;
+        }
+        .information-form {
+            position: relative;
+            width: 100%;
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                .form-group__item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    .form-label {
+                        font-weight: 500;
+                        color: rgb(89, 89, 89);
+                        margin-bottom: 0;
+                        span {
+                            color: #ff4d4f;
+                        }
+                    }
+                    .form-input {
+                        width: 100% !important;
+                        height: 50px;
+                        line-height: 50px;
+                        padding: 0 12px;
+                    }
+                }
+                .form-btn {
+                    width: 100%;
+                    height: 50px;
+                    background-color: var(--primary-color);
+                    color: #fff;
+                    line-height: 50px;
+                    text-align: center;
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    transition: all .3s ease;
+                    &:hover {
+                        background-color: var(--primary-color-hover);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 736px) {
+    .information-wrapper {
+        .information-inner {
+            flex-direction: row;
+            align-items: flex-start;
+            .information-form {
+                width: calc(100% - 198px);
+            }
+        }
+    }
+}

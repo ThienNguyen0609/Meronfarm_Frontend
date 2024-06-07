@@ -1,0 +1,86 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+a {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.my-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.component-container {
+    margin-top: 84px;
+    width: 100%;
+}
+
+.path-link {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    .path-link-home {
+        text-decoration: none;
+        color: var(--primary-color) !important;
+        margin-right: 10px;
+    }
+    .path-icon {
+        font-size: 13px;
+        margin-right: 10px;
+    }
+    .path-current {
+        color: var(--font-gray-color);
+        margin-right: 10px;
+    }
+}
+
+.product-container {
+    position: relative;
+    .product-content {
+        position: relative;
+        .product-title {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .upper-text {
+                text-transform: uppercase;
+            }
+            .link {
+                display: block;
+                text-decoration: none;
+                color: rgb(239, 103, 15) !important;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+
+.p-item {
+    max-width: calc((1/2)*100%) !important;
+}
+
+@media only screen and (min-width: 736px) {
+    .p-item {
+        max-width: calc((1/3) * 100%) !important;
+    }
+}
+
+@media only screen and (min-width: 976px) {
+    .p-item {
+        max-width: calc((1/4) * 100%) !important;
+    }
+}
+
+@media only screen and (min-width: 1216px) {
+    .p-item {
+        max-width: calc((1/5) * 100%) !important;
+    }
+}

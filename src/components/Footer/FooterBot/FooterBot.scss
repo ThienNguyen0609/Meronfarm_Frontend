@@ -1,0 +1,18 @@
+.fb-wrapper {
+    position: relative;
+    .fb-inner {
+        position: relative;
+        background-color: #F2853F;
+        .fb-content {
+            position: relative;
+            padding: 15px 0;
+            text-align: center;
+            color: #ffffff;
+
+            .text {
+                margin: 0;
+                line-height: 25px;
+            }
+        }
+    }
+}

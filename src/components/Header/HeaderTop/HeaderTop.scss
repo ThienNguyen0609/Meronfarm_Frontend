@@ -1,0 +1,55 @@
+.header-top {
+  width: 100%;
+  background: rgb(239, 103, 15);
+
+  .header-top-content {
+    height: 30px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+
+    .content-left {
+      display: flex;
+      .email {
+        position: relative;
+
+        &::before {
+          position: absolute;
+          content: "";
+          display: block;
+          height: 13px;
+          border: 1px solid #fff;
+          left: -9px;
+          top: 3px;
+        }
+      }
+    }
+    .content-right {
+      cursor: pointer;
+
+      &:hover a {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 429px) {
+  .header-top {
+    .header-top-content {
+      .content-left {
+        .dp {
+          display: none !important;
+        }
+      }
+    }
+  }
+}

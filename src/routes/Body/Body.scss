@@ -1,0 +1,30 @@
+.body-wrapper {
+    width: 100%;
+    padding-top: 90px;
+}
+
+.b-width {
+    max-width: 496px;
+    margin: auto;
+}
+
+@media only screen and (min-width: 736px) {
+    .b-width {
+        max-width: 736px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 976px) {
+    .b-width {
+        max-width: 976px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 1216px) {
+    .b-width {
+        max-width: 1216px;
+        margin: auto;
+    }
+}

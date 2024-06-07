@@ -1,0 +1,94 @@
+.result-wrapper {
+    position: relative;
+
+    .result-inner {
+        position: relative;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                p {
+                    margin: 0;
+                }
+                .title {
+                    font-weight: 500;
+                    font-size: 1rem;
+                }
+                .quantity {
+                    color: var(--font-gray-color);
+                    font-size: .9rem;
+                }
+            }
+            .order {
+                position: relative;
+                font-size: 13px;
+                .order-select {
+                    position: relative;
+                    cursor: pointer;
+                    height: 42px;
+                    width: 220px !important;
+                    color: rgb(89, 89, 89);
+                    font-weight: 400;
+                    border: 1px solid #d9d9d9;
+                    border-radius: 6px;
+                    padding: 0 11px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    transition: all .5s ease;
+                    z-index: 1;
+                    .order-dropdown {
+                        display: none;
+                        position: absolute;
+                        top: calc(100% + 4px);
+                        left: 0;
+                        width: 100%;
+                        padding: 5px 0;
+                        border-radius: 5px;
+                        background-color: #fff;
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                        z-index: 0;
+                        .dropdown-item {
+                            height: 42px;
+                            padding: 0 12px;
+                            display: flex;
+                            align-items: center;
+                            font-weight: 500;
+                            color: rgb(89, 89, 89);
+                            cursor: pointer;
+                            &:hover {
+                                background-color: #f5f5f5;
+                            }
+                        }
+                        .selected {
+                            background-color: #fff4e6 !important;
+                        }
+                    }
+                    .active {
+                        display: block;
+                    }
+                    &:hover {
+                        border: 1px solid var(--primary-color-hover);
+                    }
+                }
+                .order-select-target {
+                    box-shadow: 0 0 0 2px rgba(239, 103, 15, 0.2);
+                    border: 1px solid var(--primary-color-hover);
+                }
+            }
+        }
+        .result-display {
+            display: flex;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+    }
+}
