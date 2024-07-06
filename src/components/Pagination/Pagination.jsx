@@ -17,7 +17,7 @@ const  Pagination = ({index=1, lastIndex, linkAddress}) => {
                 {index >= 5 && <div className='item icon'><FontAwesomeIcon icon={faEllipsisH} /></div>}
                 {index-2 >= 1 && <Link className='link item' to={`${linkAddress}${index-2}`}>{index-2}</Link>}
                 {index-1 >= 1 && <Link className='link item' to={`${linkAddress}${index-1}`}>{index-1}</Link>}
-                <Link className='item active' to="#">{index}</Link>
+                <Link className='item active'>{index}</Link>
                 {index+1 <= lastIndex && <Link className='link item' to={`${linkAddress}${index+1}`}>{index+1}</Link>}
                 {index+2 <= lastIndex && <Link className='link item' to={`${linkAddress}${index+2}`}>{index+2}</Link>}
                 {index <= lastIndex-4 && <div className='item icon'><FontAwesomeIcon icon={faEllipsisH} /></div>}

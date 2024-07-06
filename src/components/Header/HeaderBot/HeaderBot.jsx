@@ -25,7 +25,7 @@ const HeaderBot = () => {
               <Link className="link-to-home" to={'/'}><img className="logo" src={logo} alt="logo" /></Link>
               <div className="menu">
                 <Link to={'/about-us'} className="menu-item">Về chúng tôi</Link>
-                <Link to={'/search?CaterogyId=all&Page=1'} className="menu-item">Sản phẩm</Link>
+                <Link to={'/search'} className="menu-item">Sản phẩm</Link>
               </div>
             </div>
             <div className="sidebar">

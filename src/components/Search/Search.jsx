@@ -28,7 +28,7 @@ const Search = () => {
               <span className="path-current">Trái cây</span>
             </div>
             <Category />
-            <Result page={page} />
+            <Result page={page === null ? 1 : page} />
           </div>
         </div>
       </div>
