@@ -2,13 +2,21 @@ import './Information.scss';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Information = () => {
-    const [name, setName] = useState("Nguyen Hoan Thien");
-    const [usename, setUsername] = useState("ThienNguyen");
-    const [phoneNumber, setPhoneNumber] = useState("0123456789");
-    const [email, setEmail] = useState("sss@gmail.com")
+    const [name, setName] = useState("");
+    const [usename, setUsername] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [email, setEmail] = useState("")
+
+    useEffect(() => {
+        const { data } = JSON.parse(localStorage.getItem("account"))
+        setName(data.name)
+        setEmail(data.email)
+        setUsername(data.userName)
+        setPhoneNumber(data.phoneNumber)
+    }, [])
     return (
         <>
         <div className='profile-inner'>

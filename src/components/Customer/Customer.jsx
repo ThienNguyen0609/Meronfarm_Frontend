@@ -2,13 +2,14 @@ import "./Customer.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight, faUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Information from "./Information/Information";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import Notification from "./Notification/Notification";
 import Address from "./Address/Address";
 import Voucher from "./Voucher/Voucher";
+import { checkSession } from "../../services/authenticationService";
 
 const Customer = () => {
   const { service } = useParams();
@@ -17,7 +18,9 @@ const Customer = () => {
   const [orderActive, setOrderActive] = useState(false)
   const [divActive, setDivActive] = useState(false)
   const [pageIndex, setPageIndex] = useState(1)
+  const [name, setName] = useState("");
   const productRef = useRef()
+  const navigate = useNavigate();
   useEffect(() => {
     switch (service) {
         case "information":
@@ -56,6 +59,14 @@ const Customer = () => {
             break;
     }
   }, [service])
+
+  useEffect(() => {
+    if(!checkSession()) navigate("/")
+    else {
+      const { data } = JSON.parse(localStorage.getItem("account"))
+      setName(data.name)
+    }
+  }, [])
   useEffect(() => {
     document.addEventListener("click", e => {
         if(!e.target.closest(".not-link") && e.target.closest(".list-item")) {
@@ -81,7 +92,7 @@ const Customer = () => {
                     </div>
                     <div className="text">
                         <span>Tài khoản</span>
-                        <span className="text-name">Nguyễn Hoàn Thiện</span>
+                        <span className="text-name">{name}</span>
                     </div>
                 </div>
                 <div className="customer-menu__list">

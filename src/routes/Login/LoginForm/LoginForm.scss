@@ -1,0 +1,14 @@
+
+.forget-text {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 13px;
+    color: var(--primary-color);
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,28 @@
+.tag-wrapper {
+    position: relative;
+    .tag-inner {
+        position: relative;
+        width: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .tag-text {
+            word-break: break-word;
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 600 !important;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .tag-line {
+            position: absolute;
+            left: 72px;
+            width: 1px;
+            height: 17px;
+            background-color: var(--primary-color);
+        }
+    }
+}

@@ -10,6 +10,8 @@ import Customer from "../components/Customer/Customer";
 import Information from "../components/Customer/Information/Information";
 import Policy from "../components/Policy/Policy";
 import Cart from "../components/Cart/Cart";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
           }
         ]
       },
+      {
+        path: "login/",
+        element: <Login />
+      },
+      {
+        path: "register/",
+        element: <Register />
+      }
     ]
   },
 ]);

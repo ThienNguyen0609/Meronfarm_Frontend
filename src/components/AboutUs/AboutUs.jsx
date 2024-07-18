@@ -12,6 +12,7 @@ import nutritionFood from '../../assets/images/category/anvatdinhduong.png'
 import other from '../../assets/images/category/sanphamconlai.jpeg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTelegram, faFacebook, faFacebookMessenger, faPinterest } from "@fortawesome/free-brands-svg-icons"
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
@@ -172,58 +173,58 @@ const AboutUs = () => {
               </div>
               <div className="category">
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=1"} className="item-inner">
                     <img src={fruit} alt="picture" />
                     <span>Trái cây</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=2"} className="item-inner">
                     <img src={vegetable} alt="picture" />
                     <span>Rau củ</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=3"} className="item-inner">
                     <img src={spice} alt="picture" />
                     <span>Gia vị</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=4"} className="item-inner">
                     <img src={egg} alt="picture" />
                     <span>Trứng</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=5"} className="item-inner">
                     <img src={drink} alt="picture" />
                     <span>Đồ uống</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=6"} className="item-inner">
                     <img src={dry} alt="picture" />
                     <span>Đồ khô</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=7"} className="item-inner">
                     <img src={fastFood} alt="picture" />
                     <span>Đồ ăn - uống liền</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=8"} className="item-inner">
                     <img src={nutritionFood} alt="picture" />
                     <span>Ăn vặt dinh dưỡng</span>
-                  </div>
+                  </Link>
                 </div>
                 <div className="item">
-                  <div className="item-inner">
+                  <Link to={"/search?CategoryId=9"} className="item-inner">
                     <img src={other} alt="picture" />
                     <span>Sản phẩm còn lại</span>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>

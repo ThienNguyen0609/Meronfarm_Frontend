@@ -10,6 +10,7 @@ const Product = ({product}) => {
   const [position, setPosition] = useState(0);
   const [arrowLeft, setArrowLeft] = useState(false);
   const [arrowRight, setArrowRight] = useState(true);
+
   const handleScrollToEnd = () => {
     const scrollWidth = listRef.current.scrollWidth;
     const offsetWidth = listRef.current.offsetWidth;
@@ -47,7 +48,7 @@ const Product = ({product}) => {
           </div>
         )}
         <div className="product-list" ref={listRef}>
-          {product && product.map(item => {
+          {product.map(item => {
             return (
                 <ProductItem key={item.id} productItem={item} />
             )

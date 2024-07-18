@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-const  Pagination = ({index=1, lastIndex, linkAddress}) => {
+const Pagination = ({index=1, lastIndex, linkAddress}) => {
     return (
         <>
         <div className="pagination-wrapper">

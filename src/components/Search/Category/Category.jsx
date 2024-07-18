@@ -14,12 +14,16 @@ import other from '../../../assets/images/category/sanphamconlai.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPathName } from "../../../store/features/path/pathSlice";
 
-const Category = () => {
+const Category = ({categoryId}) => {
   const innerRef = useRef();
   const [position, setPosition] = useState(0);
   const [arrowLeft, setArrowLeft] = useState(false);
   const [arrowRight, setArrowRight] = useState(false);
+  const dispatch = useDispatch();
   const handleScrollToEnd = () => {
     const scrollWidth = innerRef.current.scrollWidth;
     const offsetWidth = innerRef.current.offsetWidth;
@@ -55,64 +59,84 @@ const Category = () => {
         )}
         <div className="inner" ref={innerRef}>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=all"} className={"item-inner"+(categoryId==="all" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Tất cả"))}
+            >
               <img src={all} alt="picture" />
               <span>Tất cả</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=1"} className={"item-inner"+(categoryId==="1" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Trái cây"))}
+            >
               <img src={fruit} alt="picture" />
               <span>Trái cây</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=2"} className={"item-inner"+(categoryId==="2" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Rau củ"))}
+            >
               <img src={vegetable} alt="picture" />
               <span>Rau củ</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=3"} className={"item-inner"+(categoryId==="3" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Gia vị"))}
+            >
               <img src={spice} alt="picture" />
               <span>Gia vị</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=4"} className={"item-inner"+(categoryId==="4" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Trứng"))}
+            >
               <img src={egg} alt="picture" />
               <span>Trứng</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=5"} className={"item-inner"+(categoryId==="5" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Đồ uống"))}
+            >
               <img src={drink} alt="picture" />
               <span>Đồ uống</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=6"} className={"item-inner"+(categoryId==="6" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Đồ khô"))}
+            >
               <img src={dry} alt="picture" />
               <span>Đồ khô</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=7"} className={"item-inner"+(categoryId==="7" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Đồ ăn - uống liền"))}
+            >
               <img src={fastFood} alt="picture" />
               <span>Đồ ăn - uống liền</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=8"} className={"item-inner"+(categoryId==="8" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Ăn vặt dinh dưỡng"))}
+            >
               <img src={nutritionFood} alt="picture" />
               <span>Ăn vặt dinh dưỡng</span>
-            </div>
+            </Link>
           </div>
           <div className="item">
-            <div className="item-inner">
+            <Link to={"/search?CategoryId=9"} className={"item-inner"+(categoryId==="9" ? " active" : "")}
+              onClick={() => dispatch(setPathName("Còn lại"))}
+            >
               <img src={other} alt="picture" />
               <span>Sản phẩm còn lại</span>
-            </div>
+            </Link>
           </div>
         </div>
         {arrowRight && (

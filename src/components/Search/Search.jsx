@@ -7,14 +7,19 @@ import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams } from "react-router-dom";
 import Result from "./Result/Result";
 import Category from "./Category/Category";
+import { useSelector } from "react-redux";
 
 const Search = () => {
+  const { pathName } = useSelector(state => state.path)
   const [searchParams] = useSearchParams();
   const page = searchParams.get("Page");
+  const categoryId = searchParams.get("CategoryId");
+  const sort = searchParams.get("Sort");
+  const stock = searchParams.get("Stock")
   return (
     <>
       <div className="search-wrapper">
-        <Filter />
+        <Filter categoryId={categoryId} sort={sort} />
         <div className="search-inner b-width">
           <div className="search-content">
             <div className="path-link">
@@ -25,10 +30,15 @@ const Search = () => {
                 className="path-icon"
                 icon={faAngleDoubleRight}
               />
-              <span className="path-current">Trái cây</span>
+              <span className="path-current">{pathName}</span>
             </div>
-            <Category />
-            <Result page={page === null ? 1 : page} />
+            <Category categoryId={categoryId} />
+            <Result 
+              page={page === null ? 1 : page} 
+              categoryId={categoryId} 
+              sort={sort}
+              stock={stock}
+            />
           </div>
         </div>
       </div>

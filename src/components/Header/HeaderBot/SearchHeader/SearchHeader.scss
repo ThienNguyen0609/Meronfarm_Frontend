@@ -1,0 +1,28 @@
+.search-input-wrapper {
+    width: 300px;
+
+    .content {
+      flex: 1;
+      height: 42px;
+      background: rgb(255, 255, 255);
+      font-size: 13px;
+      border: 1px solid rgb(217, 217, 217);
+      border-radius: 999px;
+      padding: 4px 12px;
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+
+      input {
+        background-color: #fff;
+        border: none;
+        outline: none;
+        color: #595959;
+        flex: 1;
+      }
+
+      &:hover {
+        border: 1px solid var(--primary-color-hover);
+      }
+    }
+  }
