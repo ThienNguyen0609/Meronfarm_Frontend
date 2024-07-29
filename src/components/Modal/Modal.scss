@@ -1,0 +1,48 @@
+.meron-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999;
+    animation: showModal .5s ease forwards;
+
+    .meron-modal-inner {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        animation: showModalInner .5s ease forwards;
+
+        .meron-modal-content {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            color: #595959;
+            width: 500px;
+            min-height: 206px;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+    }
+}
+
+@keyframes showModal {
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+    to {
+        background: rgb(0, 0, 0, .3);
+    }
+}
+
+@keyframes showModalInner {
+    from {
+        transform: translate(0, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0, 150px);
+        opacity: 1;
+    }
+}

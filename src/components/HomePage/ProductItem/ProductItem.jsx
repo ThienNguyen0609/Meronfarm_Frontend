@@ -3,6 +3,7 @@ import "./ProductItem.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductItem = ({ productItem }) => {
   const [isHover, setIsHover] = useState(false);
@@ -13,13 +14,14 @@ const ProductItem = ({ productItem }) => {
           <div className="item-image">
             <img src={`src/assets/images/product/${productItem.imageSrc}.png`} alt={`${productItem.imageSrc}`} />
           </div>
-          <div 
+          <Link 
+            to={`/product/detail?id=${productItem.id}`}
             className={"item-overlay"+(isHover ? " overlay-active" : "")} 
             onMouseLeave={() => setIsHover(false)}
             onMouseOver={() => setIsHover(true)}
           >
             <FontAwesomeIcon icon={faEye} /> Review
-          </div>
+          </Link>
           <div className="item-content">
             <div className="item-title">
               <h6>{productItem.name}</h6>

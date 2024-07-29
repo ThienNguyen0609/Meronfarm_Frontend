@@ -25,4 +25,27 @@
             background-color: var(--primary-color);
         }
     }
+    .login-icon {
+        width: 30px;
+        height: 30px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        transition: all .3s ease;
+        &:hover {
+            color: var(--primary-color);
+        }
+    }
 }
+
+@media (max-width: 465px) {
+    .tag-wrapper {
+        .tag-inner {
+            display: none;
+        }
+        .login-icon {
+            display: flex;
+        }
+    }
+  }

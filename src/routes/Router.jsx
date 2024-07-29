@@ -7,11 +7,11 @@ import HomePage from "../components/HomePage/HomePage";
 import Search from "../components/Search/Search";
 import AboutUs from "../components/AboutUs/AboutUs";
 import Customer from "../components/Customer/Customer";
-import Information from "../components/Customer/Information/Information";
 import Policy from "../components/Policy/Policy";
 import Cart from "../components/Cart/Cart";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import Detail from "../components/Detail/Detail";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +50,10 @@ const router = createBrowserRouter([
               {
                 path: "cart-details/",
                 element: <Cart />
+              },
+              {
+                path: "product/detail",
+                element: <Detail />
               }
             ]
           }

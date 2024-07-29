@@ -36,8 +36,8 @@ const UserTag = () => {
           <div className="avatar">
             <FontAwesomeIcon icon={faUser} />
           </div>
-          <div className="text">{username}</div>
-          <FontAwesomeIcon icon={faCaretDown} />
+          <div className="text d-res">{username}</div>
+          <FontAwesomeIcon className="d-res" icon={faCaretDown} />
         </div>
         <div className={"avatar-dropdown" + (active ? " active" : "")}>
           <div className="dropdown-arrow"></div>

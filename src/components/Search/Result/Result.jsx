@@ -85,10 +85,10 @@ const Result = ({page, categoryId, sort, stock}) => {
                             return <ProductItem key={item.id} productItem={item} />
                         })}
                     </div>
-                    <Pagination index={parseInt(page)} lastIndex={data.len % 10 >= 0 ? Math.ceil(data.len / 10) : data.len / 10} linkAddress={`/search?CategoryId=${categoryId}${sort !== null ? `&Sort=${sort}` : ""}${stock !== null ? `&Stock=${stock}` : ""}&Page=`} />
+                    <Pagination index={parseInt(page)} lastIndex={Math.ceil(data.len / 10)} linkAddress={`/search?CategoryId=${categoryId}${sort !== null ? `&Sort=${sort}` : ""}${stock !== null ? `&Stock=${stock}` : ""}&Page=`} />
                     </>
                 ) : (
-                    <div className='empty-product'>
+                    <div className='empty'>
                         <img src={OutOfStockLogo} alt='empty' />
                         <div className="empty-discription">
                             <span className='empty-title'>Không tìm thấy sản phẩm</span>

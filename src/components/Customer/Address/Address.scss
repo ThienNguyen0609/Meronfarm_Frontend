@@ -1,107 +1,12 @@
-.address-wrapper {
-    position: relative;
-    width: 100%;
-    .address-inner {
-        position: relative;
-        width: 100%;
-        .addresses {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            .address-item {
-                width: 100%;
-                border: 1px solid rgb(241, 241, 241);
-                border-radius: 6px;
-                padding: 18px;
-                transition: all 0.4s ease 0s;
-                position: relative;
-                overflow: hidden;
-                display: flex;
-                .address-item__inner {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 12px;
-                    width: 100%;
-                    .address-item__image {
-                        height: 42px;
-                        width: 42px;
-                        border-radius: 50%;
-                        display: flex;
-                        -webkit-box-align: center;
-                        align-items: center;
-                        -webkit-box-pack: center;
-                        justify-content: center;
-                        font-size: 20px;
-                        background-color: var(--primary-color-9);
-                        color: var(--primary-color);
-                    }
-                    .address-item__content {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 12px;
-                        color: #595959;
-                        font-size: 13px;
-                        font-weight: 500;
-                        width: calc(100% - 54px);
-                        .action-status {
-                            position: relative;
-                            margin-top: 12px;
-                            display: flex;
-                            align-items: center;
-                            gap: 25px;
-                            width: 100%;
+.addr-btn {
+    height: 36px;
+    background: #fff;
+    color: #595959;
+    border: none;
+    border-radius: 5px;
+    transition: all .3s ease;
 
-                            .as-item {
-                                cursor: pointer;
-                                display: flex;
-                                align-items: center;
-                                gap: 8px;
-                            }
-                            .status,
-                            .update {
-                                position: relative;
-
-                                &::after {
-                                    position: absolute;
-                                    content: "";
-                                    width: 1px;
-                                    height: 100%;
-                                    top: 0;
-                                    right: -13px;
-                                    background-color: rgb(232, 232, 232);
-                                }
-                            }
-                            .delete {
-                                color: rgb(255, 0, 0);
-                            }
-                            .default-color {
-                                color: var(--primary-color);
-                            }
-                            .default-disabled {
-                                cursor: not-allowed;
-                                color: rgb(255, 157, 157) !important;
-                            }
-
-                            &::before {
-                                position: absolute;
-                                content: "";
-                                top: -12px;
-                                left: 0;
-                                height: 1px;
-                                width: 100%;
-                                background: rgba(0, 0, 0, 0.06);
-                            }
-                        }
-                    }
-                }
-
-                &:hover {
-                    border: 1px solid var(--primary-color);
-                }
-            }
-            .address-item-default {
-                border: 1px solid var(--primary-color);
-            }
-        }
+    &:hover {
+        background: rgba(0, 0, 0, 0.05);
     }
 }

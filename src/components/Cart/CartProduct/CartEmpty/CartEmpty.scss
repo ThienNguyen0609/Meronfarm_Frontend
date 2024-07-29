@@ -1,0 +1,23 @@
+.empty-cart {
+    margin-top: 100px;
+
+    .empty-btn {
+        margin-top: 20px;
+        width: 200px;
+        height: 42px;
+        font-weight: 600;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: var(--primary-color);
+        border-radius: 6px;
+        transition: all .3s ease;
+
+        &:hover {
+            background-color: var(--primary-color-hover);
+        }
+    }
+}

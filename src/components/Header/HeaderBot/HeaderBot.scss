@@ -32,29 +32,13 @@
   }
 }
 
-@media (min-width: 880px) {
-
-}
-
 @media (max-width: 879px) {
   .header-bot {
     .header-bot-content {
       .content-right {
         flex: 1;
-        .search-wrapper {
+        .search-input-wrapper {
           width: 100%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 425px) {
-  .header-bot {
-    .header-bot-content {
-      .content-right {
-        .search-wrapper {
-          max-width: 300px;
         }
       }
     }

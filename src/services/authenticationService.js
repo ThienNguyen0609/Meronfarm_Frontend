@@ -36,10 +36,15 @@ const setSession = (isAuthenticated, accessToken, dataRes) => {
     localStorage.setItem("account", JSON.stringify(data));
 }
 
+const getSession = () => {
+    return JSON.parse(localStorage.getItem("account"))
+}
+
 export {
     userCheckEmailOrPhoneNumber,
     userLogin,
     userRegister,
     checkSession,
-    setSession
+    setSession,
+    getSession,
 }

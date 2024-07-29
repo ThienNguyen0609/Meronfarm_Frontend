@@ -1,0 +1,29 @@
+.form-group-option {
+    position: absolute;
+    left: 0;
+    top: 58px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 300px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: rgb(140, 140, 140) 0px 0px 6px;
+    overflow: auto;
+    scrollbar-width: none;
+    z-index: 9;
+    .meron-form-option {
+        width: 100%;
+        height: 48px;
+        padding: 10px;
+        color: #595959;
+        cursor: pointer;
+        margin-bottom: 5px;
+        transition: all .3s ease;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+    }
+}

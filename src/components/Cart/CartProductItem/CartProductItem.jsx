@@ -1,27 +1,37 @@
 import './CartProductItem.scss';
 
-import productImage from "../../../assets/images/homepage/po_image_1.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { removeProductCart } from '../../../services/meronfarmService';
+import { toastify } from '../../../services/toastify';
+import { useDispatch } from 'react-redux';
 
 const CartProductItem = (props) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [value, setValue] = useState(1);
-  const minusRef = useRef();
+  const [isRemove, setIsRemove] = useState(false);
+  const [value, setValue] = useState(props.quantity);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if(value === 1) minusRef.current.disabled = true;
-    else minusRef.current.disabled = false;
-  }, [value])
+  const handleRemoveProductCart = async () => {
+    const response = await removeProductCart(props.productCartId)
+    if(response.status) {
+      toastify(true, "success", response.message, dispatch)
+      props.setLen(l => --l);
+      setIsRemove(true)
+    }
+  }
+
   useEffect(() => {
     props.isAllChecked ? setIsChecked(true) : setIsChecked(false)
   }, [props.isAllChecked])
   useEffect(() => {
-    isChecked ? props.productPrice(draft => draft + props.product.price) : props.productPrice(draft => draft === 0 ? draft = 0 : draft - props.product.price)
+    isChecked ? props.productPrice(draft => draft + props.product.price*value) 
+              : props.productPrice(draft => draft === 0 ? draft = 0 : draft - props.product.price*value)
   }, [isChecked])
     return (
       <>
+      {!isRemove &&
         <div className="display-bd display-pd mrow">
           <div className="product-info mcol-5">
             <div className="opt">
@@ -30,13 +40,13 @@ const CartProductItem = (props) => {
             </div>
             <div className="product-info__inner">
               <div className="product-image">
-                <img src={productImage} alt="image" />
+                <img src={`src/assets/images/product/${props.product.imageSrc}.png`} alt="image" />
               </div>
               <div className="product-text">
                 <div className="product-name">{props.product.name}</div>
                 <div className="quantity-sold">
                   <span>
-                    Số lượng: <span className="inner">{props.product.quantity}</span>
+                    Số lượng: <span className={`quantity-${props.product.quantity.id}`}>{props.product.quantity.quantityType}</span>
                   </span>
                   <div className="qs"></div>
                   <span>
@@ -45,10 +55,10 @@ const CartProductItem = (props) => {
                 </div>
                 <div className="quantity-action quantity-mobile" style={{ marginTop: "4px" }}>
                   <button
-                    ref={minusRef}
                     onClick={() => setValue((draft) => --draft)}
                     className="btn-minus"
                     type="button"
+                    disabled={value === 1 ? true : false}
                   >
                     <FontAwesomeIcon icon={faMinus} />
                   </button>
@@ -66,10 +76,10 @@ const CartProductItem = (props) => {
           </div>
           <div className="mcol-3 quantity-action dp-none quantity-lap">
             <button
-              ref={minusRef}
               onClick={() => setValue((draft) => --draft)}
               className="btn-minus"
               type="button"
+              disabled={value === 1 ? true : false}
             >
               <FontAwesomeIcon icon={faMinus} />
             </button>
@@ -82,13 +92,14 @@ const CartProductItem = (props) => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <div className="mcol-2 product-price">{props.product.price}đ</div>
+          <div className="mcol-2 product-price">{props.product.price*value}đ</div>
           <div className="remove-icon">
-            <div className="icon">
+            <div className="icon" onClick={() => handleRemoveProductCart()}>
               <FontAwesomeIcon icon={faTimes} />
             </div>
           </div>
         </div>
+      }
       </>
     );
 }
