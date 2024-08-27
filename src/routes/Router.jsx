@@ -12,6 +12,7 @@ import Cart from "../components/Cart/Cart";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Detail from "../components/Detail/Detail";
+import AdminPage from "../components/Admin/AdminPage";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
               {
                 path: "product/detail",
                 element: <Detail />
+              },
+              {
+                path: "admin/:page",
+                element: <AdminPage />
               }
             ]
           }

@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import { setToast } from "../store/features/toastify/toastifySlice";
 
 const toastify = (isShow, type, message, dispatch) => {

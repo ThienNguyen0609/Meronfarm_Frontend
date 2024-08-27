@@ -36,8 +36,13 @@ const CartDisplay = ({props, productCart, setLen}) => {
                 product={item.product}
                 quantity={item.quantity}
                 isAllChecked={isChecked}
-                productPrice={props.setNormalPrice}
+                setIsAllChecked={setIsChecked}
+                normalPrice={props.setNormalPrice}
                 setLen={setLen}
+                productOrder={props.productOrder}
+                setProductQuantity={props.setProductQuantity}
+                setProductTotalItemQuantity={props.setProductTotalItemQuantity}
+                setProductOrder={props.setProductOrder}
               />
             );
           })}

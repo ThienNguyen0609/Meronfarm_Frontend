@@ -18,8 +18,9 @@
             display: flex;
             flex-direction: column;
             background-color: #fff;
-            color: #595959;
+            color: var(--font-green-color);
             width: 500px;
+            min-width: 355px;
             min-height: 206px;
             border-radius: 10px;
             margin: 0 10px;

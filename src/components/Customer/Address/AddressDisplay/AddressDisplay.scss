@@ -4,6 +4,9 @@
     .address-inner {
         position: relative;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .addresses {
             display: flex;
             flex-direction: column;
@@ -40,7 +43,7 @@
                         display: flex;
                         flex-direction: column;
                         gap: 12px;
-                        color: #595959;
+                        color: var(--font-green-color);
                         font-size: 13px;
                         font-weight: 500;
                         width: calc(100% - 54px);
@@ -109,6 +112,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+    }
+}
+
+@media only screen and (min-width: 1216px) {
+    .address-wrapper {
+        .address-inner {
+            min-height: 524px;
         }
     }
 }

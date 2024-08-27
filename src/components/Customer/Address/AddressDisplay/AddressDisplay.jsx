@@ -3,26 +3,38 @@ import "./AddressDisplay.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle, faEdit } from '@fortawesome/free-regular-svg-icons';
-import logo from '../../../../assets/images/product/HetHang/HetHang.png'
+import logo from '../../../../assets/images/empty/product_empty.png'
 import _ from "lodash";
-import { getSession } from "../../../../services/authenticationService";
-import { useGetAddressBySearchParamsQuery } from "../../../../store/features/address/addressApi";
+import { getUserIdSession } from "../../../../services/authenticationService";
+import { useGetAddressBySearchParamsQuery } from "../../../../store/features/meronfarm/meronfarmApi";
 import Pagination from "../../../Pagination/Pagination";
+import { removeAddress } from "../../../../services/meronfarmService";
+import { toastify } from "../../../../services/toastify";
+import { useDispatch } from "react-redux";
 
 const AddressDisplay = ({page}) => {
-  const { data, error, isLoading } = useGetAddressBySearchParamsQuery({
-    userId: getSession().data.id, 
+  const { data: addresses, error, isLoading } = useGetAddressBySearchParamsQuery({
+    userId: getUserIdSession(), 
     page: parseInt(page), 
     limit: 3
   })
+  const dispatch = useDispatch();
+
+  const handleDeleteAddress = async (addressId, isDefault) => {
+    if(!isDefault) {
+      const response = await removeAddress(addressId);
+      if(response.status) toastify(true, "success", response.message, dispatch)
+      else toastify(true, "error", response.message, dispatch)
+    }
+  }
   return (
     <>
-      <div className="address-wrapper col-12">
+      <div className="address-wrapper">
         <div className="address-inner">
-          {data && !_.isEmpty(data) && data.len > 0 ? (
+          {!error && !isLoading && addresses && !_.isEmpty(addresses) && addresses.len > 0 ? (
           <>
           <div className="addresses"> 
-            {data.addresses.map((item) => {
+            {addresses.addresses.map((item) => {
               return (
                 <div
                   key={item.id}
@@ -66,6 +78,7 @@ const AddressDisplay = ({page}) => {
                             "delete as-item" +
                             (item.isDefault ? " default-disabled" : "")
                           }
+                          onClick={() => handleDeleteAddress(item.id, item.isDefault)}
                         >
                           <FontAwesomeIcon className="icon" icon={faTrash} />
                           <span>Xóa</span>
@@ -79,7 +92,7 @@ const AddressDisplay = ({page}) => {
           </div>
           <Pagination 
             index={parseInt(page)} 
-            lastIndex={Math.ceil(data.len / 3)} 
+            lastIndex={Math.ceil(addresses.len / 3)} 
             linkAddress={`/customer/addresses?Page=`} 
           />
           </>

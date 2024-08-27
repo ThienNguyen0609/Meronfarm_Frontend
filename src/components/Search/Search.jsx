@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const Search = () => {
   const { pathName } = useSelector(state => state.path)
   const [searchParams] = useSearchParams();
+  const search = searchParams.get("q");
   const page = searchParams.get("Page");
   const categoryId = searchParams.get("CategoryId");
   const sort = searchParams.get("Sort");
@@ -19,7 +20,7 @@ const Search = () => {
   return (
     <>
       <div className="search-wrapper">
-        <Filter categoryId={categoryId} sort={sort} />
+        <Filter search={search} categoryId={categoryId} sort={sort} />
         <div className="search-inner b-width">
           <div className="search-content">
             <div className="path-link">
@@ -32,10 +33,11 @@ const Search = () => {
               />
               <span className="path-current">{pathName}</span>
             </div>
-            <Category categoryId={categoryId} />
+            <Category search={search} categoryId={categoryId} />
             <Result 
+              search={search === null || search === "" ? 0 : search}
               page={page === null ? 1 : page} 
-              categoryId={categoryId} 
+              categoryId={categoryId === "all" ? 0 : categoryId} 
               sort={sort}
               stock={stock}
             />

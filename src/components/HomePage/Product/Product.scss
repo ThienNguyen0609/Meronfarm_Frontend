@@ -24,6 +24,7 @@
         box-shadow:0 0 6px rgba(0,0,0,0.2);
         transition: all .5s ease;
         cursor: pointer;
+        z-index: 1;
 
         &:hover {
             color: var(--primary-color);

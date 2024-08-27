@@ -1,0 +1,102 @@
+.core-value {
+    position: relative;
+    padding: 0 0 64px;
+    .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 48px;
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            .title-top {
+                word-break: break-word;
+                color: var(--primary-color);
+                font-size: 13px;
+                font-weight: 700 !important;
+            }
+            .title-bot {
+                word-break: break-word;
+                color: var(--font-green-color);
+                font-size: 24px;
+                font-weight: 700 !important;
+            }
+        }
+        .core-value-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            .core-value-item {
+                max-width: 100%;
+                padding: 0 8px;
+                .core-value-item__inner {
+                    padding: 12px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 6px;
+                    cursor: pointer;
+                    transition: all .3s ease;
+
+                    .core-value-item__title {
+                        margin-top: 6px;
+                        word-break: break-word;
+                        color: var(--font-green-color);
+                        line-height: 22px;
+                        font-size: 18px;
+                        font-weight: 600 !important;
+                    }
+                    .core-value-item__text {
+                        word-break: break-word;
+                        color: rgb(108, 108, 108);
+                        line-height: 24px;
+                        font-size: 13px;
+                        white-space: pre-wrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                        display: -webkit-box;
+                        text-align: center;
+                        font-weight: 500 !important;
+                    }
+
+                    &:hover {
+                        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+@media only screen and (min-width: 736px) {
+    .core-value {
+        .inner {
+            .core-value-list {
+                .core-value-item {
+                    max-width: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1216px) {
+    .core-value {
+        .inner {
+            .core-value-list {
+                .core-value-item {
+                    max-width: 25%;
+                }
+            }
+        }
+    }
+}

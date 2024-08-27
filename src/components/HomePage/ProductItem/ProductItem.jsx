@@ -1,27 +1,60 @@
 import "./ProductItem.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { checkSession, getUserIdSession } from "../../../services/authenticationService";
+import { addFavouriteProduct, addViewedProduct } from "../../../services/meronfarmService";
+import { toastify } from "../../../services/toastify";
+import { useDispatch } from "react-redux";
 
-const ProductItem = ({ productItem }) => {
+const ProductItem = ({ productItem, classItem, isFavor }) => {
   const [isHover, setIsHover] = useState(false);
+  const dispatch = useDispatch();
+  const handleAddFavouriteProd = async (prodId) => {
+    if(checkSession()) {
+      const request = {
+        userId: getUserIdSession(),
+        productId: prodId
+      }
+      const response = await addFavouriteProduct(request)
+      if(response.status) toastify(true, "success", response.message, dispatch);
+      else toastify(true, "warning", response.message, dispatch);
+    }
+    else {
+      toastify(true, "warning", "Hãy đăng nhập hoặc tạo tài khoảng", dispatch);
+    }
+  }
+  const handleAddViewedProd = async (prodId) => {
+    if(checkSession()) {
+      const request = {
+        userId: getUserIdSession(),
+        productId: prodId
+      }
+      const response = await addViewedProduct(request)
+      console.log(response)
+    }
+  }
   return (
     <>
-      <div className="product-item p-item">
+      <div className={"product-item " + classItem}>
         <div className="p-item-content">
           <div className="item-image">
-            <img src={`src/assets/images/product/${productItem.imageSrc}.png`} alt={`${productItem.imageSrc}`} />
+            <img src={`../src/assets/images/product/${productItem.imageSrc}.png`} alt={`${productItem.imageSrc}`} />
           </div>
-          <Link 
-            to={`/product/detail?id=${productItem.id}`}
+          <div 
             className={"item-overlay"+(isHover ? " overlay-active" : "")} 
             onMouseLeave={() => setIsHover(false)}
             onMouseOver={() => setIsHover(true)}
           >
-            <FontAwesomeIcon icon={faEye} /> Review
-          </Link>
+            <Link 
+              className="item-overlay__icon" 
+              onClick={()=>handleAddViewedProd(productItem.id)}
+              to={`/product/detail?id=${productItem.id}`} 
+            ><FontAwesomeIcon icon={faEye} /></Link>
+            {!isFavor && <div className="item-overlay__icon" onClick={()=>handleAddFavouriteProd(productItem.id)}><FontAwesomeIcon icon={faHeart} /></div>}
+          </div>
           <div className="item-content">
             <div className="item-title">
               <h6>{productItem.name}</h6>

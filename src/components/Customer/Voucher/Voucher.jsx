@@ -1,6 +1,6 @@
 import './Voucher.scss';
 
-import emptyVoucher from "../../../assets/images/voucher/voucher_no_data.png"
+import emptyVoucher from "../../../assets/images/empty/voucher_empty.png"
 
 const Voucher = () => {
     return (

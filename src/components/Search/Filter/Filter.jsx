@@ -5,14 +5,14 @@ import { faCaretDown, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Filter = ({categoryId, sort}) => {
+const Filter = ({search, categoryId, sort}) => {
     const [filterText, setFilterText] = useState("Tất cả");
     const [selected, setSelected] = useState(1);
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
 
     const filterNavigate = (Stock) => {
-        navigate(`/search?CategoryId=${categoryId}${sort !== null ? `&Sort=${sort}` : ""}&Stock=${Stock}`)
+        navigate(`/search?${search !== null ? `q=${search}&` : ""}CategoryId=${categoryId}${sort !== null ? `&Sort=${sort}` : ""}&Stock=${Stock}`)
     }
     useEffect(() => {
         document.addEventListener("click", (e) => {

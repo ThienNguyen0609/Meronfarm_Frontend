@@ -50,7 +50,7 @@ const Product = ({product}) => {
         <div className="product-list" ref={listRef}>
           {product.map(item => {
             return (
-                <ProductItem key={item.id} productItem={item} />
+                <ProductItem key={item.id} productItem={item} classItem={"p-item"} isFavor={false} />
             )
           })}
         </div>

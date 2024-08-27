@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 const CartProductItem = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
-  const [value, setValue] = useState(props.quantity);
+  const [quantity, setQuantity] = useState(props.quantity);
   const dispatch = useDispatch();
 
   const handleRemoveProductCart = async () => {
@@ -22,12 +22,62 @@ const CartProductItem = (props) => {
     }
   }
 
+  const handleDecValue = () => {
+    if(isChecked) {
+      props.normalPrice(draft => draft - props.product.price)
+      props.setProductTotalItemQuantity(draft => --draft)
+      props.setProductOrder(draft => draft.map(item => {
+        if(item.productId === props.product.id) {
+          return {
+            ...item,
+            quantity: item.quantity-1,
+            totalPrice: item.totalPrice - props.product.price
+          }
+        }
+        return item
+      }))
+    }
+    setQuantity((draft) => --draft)
+  }
+
+  const handleIncValue = () => {
+    if(isChecked) {
+      props.normalPrice(draft => draft + props.product.price)
+      props.setProductTotalItemQuantity(draft => ++draft)
+      props.setProductOrder(draft => draft.map(item => {
+        if(item.productId === props.product.id) {
+          return {
+            ...item,
+            quantity: item.quantity+1,
+            totalPrice: item.totalPrice + props.product.price
+          }
+        }
+        return item
+      }))
+    }
+    setQuantity((draft) => ++draft)
+  }
+
   useEffect(() => {
     props.isAllChecked ? setIsChecked(true) : setIsChecked(false)
   }, [props.isAllChecked])
   useEffect(() => {
-    isChecked ? props.productPrice(draft => draft + props.product.price*value) 
-              : props.productPrice(draft => draft === 0 ? draft = 0 : draft - props.product.price*value)
+
+    isChecked ? props.normalPrice(draft => draft + props.product.price*quantity) 
+              : props.normalPrice(draft => draft <= 0 ? draft = 0 : draft - props.product.price*quantity)
+    
+    isChecked ? props.setProductQuantity(draft => ++draft) 
+              : props.setProductQuantity(draft => draft <= 0 ? 0 : --draft)
+
+    isChecked ? props.setProductTotalItemQuantity(draft => draft+quantity)
+              : props.setProductTotalItemQuantity(draft => draft <= 0 ? 0 : draft-quantity)
+
+    isChecked ? props.setProductOrder(draft => [...draft, {
+                quantity: quantity,
+                totalPrice: props.product.price*quantity,
+                productId: props.product.id
+              }]) 
+              : props.setProductOrder(draft => [...draft.filter(item => item.productId !== props.product.id)]) 
   }, [isChecked])
     return (
       <>
@@ -50,21 +100,21 @@ const CartProductItem = (props) => {
                   </span>
                   <div className="qs"></div>
                   <span>
-                    Đã bán <span className="inner">{props.product.sold}</span>
+                    Đã bán <span className="inner">{props.product.quantitySold}</span>
                   </span>
                 </div>
                 <div className="quantity-action quantity-mobile" style={{ marginTop: "4px" }}>
                   <button
-                    onClick={() => setValue((draft) => --draft)}
+                    onClick={() => handleDecValue()}
                     className="btn-minus"
                     type="button"
-                    disabled={value === 1 ? true : false}
+                    disabled={quantity === 1 ? true : false}
                   >
                     <FontAwesomeIcon icon={faMinus} />
                   </button>
-                  <input type="text" value={value} onChange={e=>setValue(e.target.value)} />
+                  <input type="text" value={quantity} onChange={e=>setQuantity(e.target.value)} />
                   <button
-                    onClick={() => setValue((draft) => ++draft)}
+                    onClick={() => handleIncValue()}
                     className="btn-plus"
                     type="button"
                   >
@@ -76,23 +126,23 @@ const CartProductItem = (props) => {
           </div>
           <div className="mcol-3 quantity-action dp-none quantity-lap">
             <button
-              onClick={() => setValue((draft) => --draft)}
+              onClick={() => handleDecValue()}
               className="btn-minus"
               type="button"
-              disabled={value === 1 ? true : false}
+              disabled={quantity === 1 ? true : false}
             >
               <FontAwesomeIcon icon={faMinus} />
             </button>
-            <input type='text' value={value} onChange={e=>setValue(e.target.value)} />
+            <input type='text' value={quantity} onChange={e=>setQuantity(e.target.value)} />
             <button
-              onClick={() => setValue((draft) => ++draft)}
+              onClick={() => handleIncValue()}
               className="btn-plus"
               type="button"
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <div className="mcol-2 product-price">{props.product.price*value}đ</div>
+          <div className="mcol-2 product-price">{props.product.price*quantity}đ</div>
           <div className="remove-icon">
             <div className="icon" onClick={() => handleRemoveProductCart()}>
               <FontAwesomeIcon icon={faTimes} />

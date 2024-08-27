@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { setSession } from "../../../../services/authenticationService";
+import { setSession, getSession, checkAuthority } from "../../../../services/authenticationService";
 
 const UserTag = () => {
   const [active, setActive] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -16,10 +17,12 @@ const UserTag = () => {
     window.location.href = "/";
   };
   useEffect(() => {
-    const { data } = JSON.parse(localStorage.getItem("account"));
+    const { data } = getSession();
     setName(data.name);
     setEmail(data.email);
     setUsername(data.userName);
+
+    setIsAdmin(checkAuthority())
 
     document.addEventListener("click", (e) => {
       if (
@@ -52,6 +55,29 @@ const UserTag = () => {
               </div>
             </div>
             <div className="inner-bot">
+              {isAdmin && <>
+                <Link
+                  onClick={() => setActive(false)}
+                  to={"/admin/user_manage"}
+                  className="item"
+                >
+                  Quản lý tài khoảng
+                </Link>
+                <Link
+                  onClick={() => setActive(false)}
+                  to={"/admin/order_manage"}
+                  className="item"
+                >
+                  Quản lý đơn hàng
+                </Link>
+                <Link
+                  onClick={() => setActive(false)}
+                  to={"/admin/notification_manage"}
+                  className="item"
+                >
+                  Quản lý thông báo
+                </Link>
+              </>}
               <Link
                 onClick={() => setActive(false)}
                 to={"/customer/orders"}

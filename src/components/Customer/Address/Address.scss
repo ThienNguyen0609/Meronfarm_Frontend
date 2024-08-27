@@ -1,12 +1,21 @@
-.addr-btn {
-    height: 36px;
-    background: #fff;
-    color: #595959;
-    border: none;
-    border-radius: 5px;
-    transition: all .3s ease;
+.ap-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .ap-title {
+        width: calc(100% - 120px);
+    }
+    .addr-btn {
+        height: 36px;
+        width: 120px;
+        background: #fff;
+        color: var(--font-green-color);
+        border: none;
+        border-radius: 5px;
+        transition: all .3s ease;
 
-    &:hover {
-        background: rgba(0, 0, 0, 0.05);
+        &:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
     }
 }

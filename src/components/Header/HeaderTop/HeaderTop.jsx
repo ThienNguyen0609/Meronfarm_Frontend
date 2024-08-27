@@ -6,6 +6,7 @@ import {
   faEnvelope,
   faBell
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const HeaderTop = () => {
   return (
@@ -25,7 +26,7 @@ const HeaderTop = () => {
           <div className="content-right">
             <FontAwesomeIcon icon={faBell} />
             <span className="ms-2">
-              <a href="/">Thông báo</a>
+              <Link to="/customer/notification">Thông báo</Link>
             </span>
           </div>
         </div>

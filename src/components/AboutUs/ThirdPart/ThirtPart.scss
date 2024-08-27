@@ -1,0 +1,77 @@
+.third-part {
+    position: relative;
+    padding: 64px 0;
+    .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        .title {
+            word-break: break-word;
+            color: var(--font-green-color);
+            font-size: 1.8rem;
+            font-weight: 700 !important;
+            text-align: center;
+            margin-bottom: 10px;
+
+            span {
+                color: var(--primary-color) !important;
+            }
+        }
+        .text {
+            word-break: break-word;
+            color: rgb(108, 108, 108);
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 500 !important;
+            text-align: center;
+            margin: 0;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            width: 100%;
+            overflow: auto;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            .item {
+                width: 120px;
+                height: 120px;
+                padding: 6px;
+                flex-shrink: 0;
+                .item-inner {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    text-align: center;
+                    padding: 12px 0;
+                    border: 1px solid #ffffff;
+                    border-radius: 6px;
+                    text-transform: uppercase;
+                    cursor: pointer;
+
+                    img {
+                        height: 42px;
+                        width: 42px;
+                    }
+    
+                    span {
+                        text-align: center;
+                        font-size: .8rem;
+                        font-weight: 500;
+                        color: var(--font-gray-color);
+                    }
+                    &:hover {
+                        border: 1px solid var(--primary-color-hover);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -2,8 +2,51 @@ import "./CartSummary.scss";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faTag } from '@fortawesome/free-solid-svg-icons';
+import { getUserIdSession } from "../../../services/authenticationService";
+import { addOrderProducts, createOrder } from "../../../services/meronfarmService";
+import { useRandomString } from "../../../services/useHooks";
+import { toastify } from "../../../services/toastify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addNotification } from "../../../services/meronfarmService";
 
 const CartSummary = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleCreateOrder = async () => {
+    if(props.productQuantity > 0) {
+      const randomString = useRandomString(20);
+      const concatString = `${import.meta.env.VITE_ORDERCODE_FIRST_STRING}${randomString}`
+      const request = {
+        id: concatString,
+        totalPrice: props.totalPrice,
+        totalQuantity: props.productQuantity,
+        userId: getUserIdSession()
+      }
+      const response = await createOrder(request);
+      console.log(response)
+      if(response.status) {
+        const nextRequest = props.productOrder.map(item => ({...item, orderId: concatString}))
+        const nextResponse = await addOrderProducts(getUserIdSession(), nextRequest)
+        console.log(nextResponse)
+        if(nextResponse.status) {
+          const nextRequest = {
+            message: "đã đặt đơn hàng",
+            orderId: concatString,
+            receiverId: 1
+          }
+
+          const nextResponse = await addNotification(nextRequest);
+          console.log(nextResponse)
+          props.setProductOrder([])
+          toastify(true, "success", nextResponse.message, dispatch);
+          navigate("/search?CategoryId=all")
+        }
+        else toastify(true, "error", nextResponse.message, dispatch);
+      }
+    }
+    else toastify(true, "warning", "Hãy chọn sản phẩm muốn mua", dispatch);
+  }
   return (
     <>
       <div className="cart-summary">
@@ -63,7 +106,7 @@ const CartSummary = (props) => {
               {props.totalPrice}đ
             </p>
           </div>
-          <button className="cart-summary__btn">Thanh toán (1 sản phẩm)</button>
+          <button onClick={()=>handleCreateOrder()} className="cart-summary__btn">Thanh toán ({props.productQuantity} sản phẩm)</button>
         </div>
       </div>
     </>

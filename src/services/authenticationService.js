@@ -40,6 +40,17 @@ const getSession = () => {
     return JSON.parse(localStorage.getItem("account"))
 }
 
+const getUserIdSession = () => {
+    const session = JSON.parse(localStorage.getItem("account"))
+    return session.data.id
+}
+
+const checkAuthority = () => {
+    const session = JSON.parse(localStorage.getItem("account"))
+    if(session.data.roleId === 2) return true
+    return false
+}
+
 export {
     userCheckEmailOrPhoneNumber,
     userLogin,
@@ -47,4 +58,6 @@ export {
     checkSession,
     setSession,
     getSession,
+    getUserIdSession,
+    checkAuthority
 }

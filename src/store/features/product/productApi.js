@@ -15,7 +15,7 @@ export const productApi = createApi({
             query: (categoryId) => ({ url: `Product/category/${categoryId}`, method: "GET" }),
         }),
         getProductBySearchParams: builder.query({
-            query: (params) => ({ url: `Product/q?CategoryId=${params.categoryId}&Page=${params.page}&Sort=${params.sort}&Stock=${params.stock}`, method: "GET" }),
+            query: (params) => ({ url: `Product/q?${params.search !== 0 ? `SearchString=${params.search}&` : ""}CategoryId=${params.categoryId}&Page=${params.page}&Sort=${params.sort}&Stock=${params.stock}`, method: "GET" }),
         })
     }),
 })

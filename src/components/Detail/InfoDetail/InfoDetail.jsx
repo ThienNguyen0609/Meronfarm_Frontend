@@ -25,6 +25,9 @@ const InfoDetail = ({product}) => {
       else if(response.status === 0) toastify(true, "error", response.message, dispatch)
       else toastify(true, "warning", response.message, dispatch)
     }
+    else {
+      toastify(true, "warning", "Hãy đăng nhập hoặc tạo tài khoảng", dispatch)
+    }
   }
   return (
     <>

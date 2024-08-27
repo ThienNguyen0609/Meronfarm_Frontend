@@ -15,7 +15,6 @@ const CartProduct = (props) => {
     const { data } = getSession();
     const handleGetProductCart = async () => {
       const response = await getProductCart(data.id);
-      console.log(response.shoppingCarts);
       if (response.status) {
         setProductCart(response.shoppingCarts);
         setLen(response.shoppingCarts.length);
@@ -28,7 +27,11 @@ const CartProduct = (props) => {
       <div className="cart-product">
         <div className="cart-text">Sản phẩm</div>
         {productCart && !_.isEmpty(productCart) && len > 0 ? (
-          <CartDisplay props={props} productCart={productCart} setLen={setLen} />
+          <CartDisplay 
+            props={props} 
+            productCart={productCart} 
+            setLen={setLen} 
+          />
         ) : (
           <CartEmpty />
         )}

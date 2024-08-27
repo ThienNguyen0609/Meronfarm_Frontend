@@ -1,6 +1,6 @@
 import "./CartEmpty.scss"
 
-import OutOfStockLogo from "../../../../assets/images/product/HetHang/HetHang.png"
+import OutOfStockLogo from "../../../../assets/images/empty/product_empty.png"
 import { Link } from "react-router-dom"
 
 const CartEmpty = () => {

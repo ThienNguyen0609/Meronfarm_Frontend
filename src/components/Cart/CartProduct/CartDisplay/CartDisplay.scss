@@ -24,7 +24,7 @@
     }
     .display-font {
         word-break: break-word;
-        color: #595959;
+        color: var(--font-green-color);
         font-size: 13px;
         font-weight: 500 !important;
     }
@@ -157,7 +157,7 @@
                 height: 32px;
                 border: 1px solid #d9d9d9;
                 background-color: #fff;
-                color: #595959;
+                color: var(--font-green-color);
                 display: flex;
                 align-items: center;
                 justify-content: center;

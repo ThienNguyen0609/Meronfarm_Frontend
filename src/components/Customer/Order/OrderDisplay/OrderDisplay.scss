@@ -1,0 +1,16 @@
+
+
+.code-product__font-style {
+    font-weight: 500;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.price_font-style {
+    font-weight: 700;
+    color: #EB403D;
+}
+@media only screen and (min-width: 1216px) {
+    .set-min-heigth {
+        min-height: 357px;
+    }
+}

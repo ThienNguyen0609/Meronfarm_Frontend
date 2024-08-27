@@ -1,12 +1,8 @@
 import './Notification.scss'
 
-import logo from "../../../assets/images/avatar/hubtech-avatar.jpg"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState } from 'react'
-import { notification } from '../../../context/notification'
 import { useSearchParams } from 'react-router-dom'
-import Pagination from '../../Pagination/Pagination'
+import NotificationDisplay from './NotificationDisplay/NotificationDisplay';
 
 const Notification = () => {
     const [navIndex, setNavIndex] = useState(1);
@@ -17,7 +13,6 @@ const Notification = () => {
 
     const handleActiveNav = (event, index) => {
         setNavIndex(index)
-        console.log(underlineRef.current.style )
         underlineRef.current.style.width = `${event.target.offsetWidth}`+'px'
         underlineRef.current.style.left = `${event.target.offsetLeft}`+'px';
     }
@@ -35,31 +30,8 @@ const Notification = () => {
                         <div ref={underlineRef} className='nav-item-bd-bottom'></div>
                     </div>
                     <div className="notification-content">
-                        {notification.map(item => {
-                            return (
-                            <div key={item.id} className="notification-item">
-                                <div className="notification-item__avatar">
-                                    <img src={logo} alt="avatar" />
-                                </div>
-                                <div className="notification-item__text">
-                                    <div className='notification-item__text-top'><span>{item.name}</span> {item.text} <span>{item.productId}</span></div>
-                                    <div className='notification-item__text-bot'>
-                                        <div>Ngày nhận: {item.date}</div>
-                                        <div className="status-action">
-                                            {item.status && <div className="status"><FontAwesomeIcon className='status-icon' icon={faCheckCircle} /><span>Đã đọc</span></div>}
-                                            <div className="action">Xóa</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            )
-                        })}
+                        <NotificationDisplay page={page === null ? 1 : page} />
                     </div>
-                    {notification.length >= 5 && (
-                        <div className="notification-pagination">
-                            <Pagination index={page ? parseInt(page) : 1} lastIndex={5} linkAddress={"/customer/notification?Category=all&Page="} />
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

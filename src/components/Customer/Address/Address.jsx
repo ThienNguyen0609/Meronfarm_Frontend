@@ -13,9 +13,9 @@ const Address = () => {
     const page = searchParams.get("Page");
     return (
         <>
-        <div className="profile-inner row">
-            <div className="profile-title col-10">Danh sách địa chỉ</div>
-            <button className='col-2 addr-btn' onClick={()=>setIsShow(true)}>
+        <div className="profile-inner ap-inner">
+            <div className="profile-title ap-title">Danh sách địa chỉ</div>
+            <button className='addr-btn' onClick={()=>setIsShow(true)}>
                 <FontAwesomeIcon icon={faPlus} /> Thêm mới
             </button>
             <CreateAddrModal show={isShow} setIsShow={setIsShow} />
