@@ -52,7 +52,7 @@ const CreateAddrModal = ({show, setIsShow}) => {
                 </div>
             </ModalBody>
             <ModalFooter>
-                <button className="meron-form-button add-btn-color" type="button" onClick={() => handleSubmit()}>Thêm địa chỉ</button>
+                <button className="meron-form-button action-btn-color" type="button" onClick={() => handleSubmit()}>Thêm địa chỉ</button>
                 <button className="meron-form-button close-btn-color" type="button" onClick={() => setIsShow(!show)}>Đóng</button>
             </ModalFooter>
         </Modal>

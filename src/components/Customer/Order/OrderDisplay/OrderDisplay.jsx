@@ -18,15 +18,19 @@ const OrderDisplay = ({ page, statusId }) => {
     const [isShow, setIsShow] = useState(false);
     const [orderDetail, setOrderDetail] = useState();
     const [totalPrice, setTotalPrice] = useState();
+    const [address, setAddress] = useState();
+    
+    console.log(orders)
 
-    const handleShowOrderDetail = (orderProducts, totalPrice) => {
+    const handleShowOrderDetail = (orderProducts, totalPrice, address) => {
         setOrderDetail(orderProducts)
         setTotalPrice(totalPrice)
+        setAddress(address)
         setIsShow(true)
     }
     return (
         <>
-        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} />
+        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} address={address} />
         <div className="meron-d-flex meron-t-header">
             <div className="meron-t-header__item meron-t__item meron-flex-2">Mã đơn hàng</div>
             <div className="meron-t-header__item meron-t__item meron-flex-1">Số lượng</div>
@@ -41,7 +45,7 @@ const OrderDisplay = ({ page, statusId }) => {
                             <div key={order.id} className="meron-t-body__item">
                                 <div 
                                     className="meron-flex-2 meron-t__item code-product__font-style" 
-                                    onClick={() => handleShowOrderDetail(order.orderProducts, order.totalPrice)}
+                                    onClick={() => handleShowOrderDetail(order.orderProducts, order.totalPrice, order.address)}
                                 >{order.id}</div>
                                 <div className="meron-flex-1 meron-t__item">{order.totalQuantity}</div>
                                 <div className="meron-flex-1 meron-t__item">{order.orderStatus?.status}</div>

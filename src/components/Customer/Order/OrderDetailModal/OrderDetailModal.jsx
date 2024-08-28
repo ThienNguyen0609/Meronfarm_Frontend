@@ -6,7 +6,7 @@ import ModalBody from "../../../Modal/ModalBody/ModalBody"
 import ModalFooter from "../../../Modal/ModalFooter/ModalFooter"
 import _ from "lodash"
 
-const OrderDetailModal = ({show, setIsShow, orderDetail, totalPrice}) => {
+const OrderDetailModal = ({show, setIsShow, orderDetail, totalPrice, address}) => {
     return (
         <>
         <Modal show={show} setIsShow={setIsShow}>
@@ -34,6 +34,9 @@ const OrderDetailModal = ({show, setIsShow, orderDetail, totalPrice}) => {
                             )
                         })
                     )}
+                </div>
+                <div className="address__display">
+                    Địa chỉ nhận hàng: <span>{address}</span>
                 </div>
                 <div className="total-price__display">
                     Tổng giá đơn hàng: <span>{totalPrice}</span>

@@ -9,10 +9,18 @@ import { toastify } from "../../../services/toastify";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addNotification } from "../../../services/meronfarmService";
+import { useGetAddressesByUserIdQuery } from "../../../store/features/meronfarm/meronfarmApi";
+import _ from "lodash";
+import { useEffect, useState } from "react";
+import AddressOptionModal from "./AddressOptionModal/AddressOptionModal";
 
 const CartSummary = (props) => {
+  const { data: addresses, error, isLoading } = useGetAddressesByUserIdQuery(getUserIdSession())
+  const [address, setAddress] = useState({});
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleCreateOrder = async () => {
     if(props.productQuantity > 0) {
       const randomString = useRandomString(20);
@@ -21,6 +29,7 @@ const CartSummary = (props) => {
         id: concatString,
         totalPrice: props.totalPrice,
         totalQuantity: props.productQuantity,
+        address: address.addr,
         userId: getUserIdSession()
       }
       const response = await createOrder(request);
@@ -47,8 +56,14 @@ const CartSummary = (props) => {
     }
     else toastify(true, "warning", "Hãy chọn sản phẩm muốn mua", dispatch);
   }
+  useEffect(() => {
+    if(!error && !isLoading && !_.isEmpty(addresses.addresses)) setAddress(...addresses.addresses.filter(item => item.isDefault === true))
+  }, [addresses])
   return (
     <>
+      {!error && !isLoading && (
+        <AddressOptionModal show={show} setIsShow={setShow} addresses={addresses} setAddress={setAddress} />
+      )}
       <div className="cart-summary">
         <div className="cart-summary__top">
           <div className="d-flex justify-content-between font-style">
@@ -58,18 +73,22 @@ const CartSummary = (props) => {
               </span>{" "}
               Địa chỉ nhận hàng
             </div>
-            <div className="font-color" style={{ cursor: "pointer" }}>
+            <div className="font-color" style={{ cursor: "pointer" }} onClick={()=>setShow(true)}>
               Thay đổi
             </div>
           </div>
           <div className="cart-summary__address">
-            <div className="name font-style">
-              Địa chỉ mặc định{" "}
-              <span className="font-style-2">(0827 578 477)</span>
-            </div>
-            <div className="address font-style-1">
-              Phường Cầu Ông Lãnh, Quận 1, Thành phố Hồ Chí Minh
-            </div>
+            {!_.isEmpty(address) && (
+              <>
+              <div className="name font-style">
+                {address.user.name}{" "}
+                <span className="font-style-2">({address.user.phoneNumber})</span>
+              </div>
+              <div className="address font-style-1">
+                {address.addr}
+              </div>
+              </>
+            )}
           </div>
           <div className="d-flex justify-content-between font-style">
             <div>

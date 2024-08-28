@@ -4,18 +4,17 @@ import { addNotification, updateOrder } from "../../../../services/meronfarmServ
 import { toastify } from "../../../../services/toastify"
 import { useClickOutside } from "../../../../services/useHooks";
 
-const OrderManageTableDisplay = ({index, order, orderStatuses, setIsShow, setTotalPrice, setOrderDetail}) => {
+const OrderManageTableDisplay = ({index, order, orderStatuses, setIsShow, setTotalPrice, setOrderDetail, setAddress}) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const dispatch = useDispatch();
     useClickOutside(setShowDropdown, ".om-dropdown");
 
-    const handleShowOrderDetail = (orderProducts, totalPrice) => {
+    const handleShowOrderDetail = (orderProducts, totalPrice, address) => {
         setOrderDetail(orderProducts)
         setTotalPrice(totalPrice)
+        setAddress(address)
         setIsShow(true)
     }
-
-    console.log(order)
 
     const handleUpdateOrder = async (order, orderStatusId) => {
         const request = {
@@ -50,7 +49,7 @@ const OrderManageTableDisplay = ({index, order, orderStatuses, setIsShow, setTot
             <div className="meron-flex-1 meron-t__item om-flex">{index+1}</div>
             <div 
                 className="meron-flex-3 meron-t__item om-flex code-product__font-style"
-                onClick={() => handleShowOrderDetail(order.orderProducts, order.totalPrice)}
+                onClick={() => handleShowOrderDetail(order.orderProducts, order.totalPrice, order.address)}
             >{order.id}</div>
             <div className="meron-flex-2 meron-t__item om-flex">{order.user.name}</div>
             <div className="meron-flex-1 meron-t__item om-flex">{order.totalQuantity}</div>

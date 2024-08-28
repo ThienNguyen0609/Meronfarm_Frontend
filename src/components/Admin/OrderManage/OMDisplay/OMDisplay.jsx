@@ -18,10 +18,11 @@ const OrderManageDisplay = ({page, searchString}) => {
     const [isShow, setIsShow] = useState(false);
     const [orderDetail, setOrderDetail] = useState();
     const [totalPrice, setTotalPrice] = useState();
+    const [address, setAddress] = useState();
     
     return (
         <>
-        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} />
+        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} address={address} />
         <div className="user-manage__table">
             <div className="meron-d-flex meron-t-header">
                 <div className="meron-t-header__item meron-t__item meron-flex-1">STT</div>
@@ -48,6 +49,7 @@ const OrderManageDisplay = ({page, searchString}) => {
                                     setIsShow={setIsShow}
                                     setOrderDetail={setOrderDetail}
                                     setTotalPrice={setTotalPrice}
+                                    setAddress={setAddress}
                                 />
                             )
                         })}

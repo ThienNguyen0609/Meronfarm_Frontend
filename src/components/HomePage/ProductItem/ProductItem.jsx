@@ -1,16 +1,16 @@
 import "./ProductItem.scss";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { checkSession, getUserIdSession } from "../../../services/authenticationService";
 import { addFavouriteProduct, addViewedProduct } from "../../../services/meronfarmService";
 import { toastify } from "../../../services/toastify";
 import { useDispatch } from "react-redux";
+import VerifyPurchaseModal from "./VerifyPurchaseModal/VerifyPurchaseModal";
 
 const ProductItem = ({ productItem, classItem, isFavor }) => {
   const [isHover, setIsHover] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const dispatch = useDispatch();
   const handleAddFavouriteProd = async (prodId) => {
     if(checkSession()) {
@@ -38,6 +38,7 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
   }
   return (
     <>
+      <VerifyPurchaseModal show={isShow} setIsShow={setIsShow} productItem={productItem} />
       <div className={"product-item " + classItem}>
         <div className="p-item-content">
           <div className="item-image">
@@ -52,8 +53,9 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
               className="item-overlay__icon" 
               onClick={()=>handleAddViewedProd(productItem.id)}
               to={`/product/detail?id=${productItem.id}`} 
-            ><FontAwesomeIcon icon={faEye} /></Link>
-            {!isFavor && <div className="item-overlay__icon" onClick={()=>handleAddFavouriteProd(productItem.id)}><FontAwesomeIcon icon={faHeart} /></div>}
+            >Chi tiết</Link>
+            {!isFavor && <div className="item-overlay__icon" onClick={()=>handleAddFavouriteProd(productItem.id)}>Thích</div>}
+            <div className="item-overlay__icon" onClick={()=>setIsShow(true)}>Mua ngay</div>
           </div>
           <div className="item-content">
             <div className="item-title">

@@ -17,10 +17,12 @@ const NotificationManageDisplay = ({page}) => {
     const [isShow, setIsShow] = useState(false);
     const [orderDetail, setOrderDetail] = useState();
     const [totalPrice, setTotalPrice] = useState();
+    const [address, setAddress] = useState();
 
-    const handleShowOrderDetail = (orderProducts, totalPrice) => {
+    const handleShowOrderDetail = (orderProducts, totalPrice, address) => {
         setOrderDetail(orderProducts)
         setTotalPrice(totalPrice)
+        setAddress(address)
         setIsShow(true)
     }
 
@@ -28,7 +30,7 @@ const NotificationManageDisplay = ({page}) => {
     
     return (
         <>
-        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} />
+        <OrderDetailModal show={isShow} setIsShow={setIsShow} orderDetail={orderDetail} totalPrice={totalPrice} address={address} />
         <div className="user-manage__table">
             <div className="meron-d-flex meron-t-header">
                 <div className="meron-t-header__item meron-t__item meron-flex-1">STT</div>
@@ -48,7 +50,7 @@ const NotificationManageDisplay = ({page}) => {
                                     <div className="meron-flex-2 meron-t__item">{notification.order.user.name}</div>
                                     <div 
                                         className="meron-flex-3 meron-t__item code-product__font-style"
-                                        onClick={()=>handleShowOrderDetail(notification.order.orderProducts, notification.order.totalPrice)}
+                                        onClick={()=>handleShowOrderDetail(notification.order.orderProducts, notification.order.totalPrice, notification.order.address)}
                                     >{notification.orderId}</div>
                                     <div className="meron-flex-2 meron-t__item">{notification.message}</div>
                                     <div className="meron-flex-2 meron-t__item">{new Date(notification.dateTime).toLocaleString('en-GB').replace(",", "")}</div>

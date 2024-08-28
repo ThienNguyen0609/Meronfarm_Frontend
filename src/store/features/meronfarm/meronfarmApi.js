@@ -8,6 +8,9 @@ export const meronfarmApi = createApi({
         getAddressBySearchParams: builder.query({
             query: (params) => ({ url: `Address/q?UserId=${params.userId}&Page=${params.page}&Limit=${params.limit}`, method: "GET" }),
         }),
+        getAddressesByUserId: builder.query({
+            query: (userId) => ({ url: `Address/${userId}`, method: "GET" }),
+        }),
         getFavouriteBySearchParams: builder.query({
             query: (params) => ({ url: `Favourite/q?UserId=${params.userId}&Page=${params.page}&Limit=${params.limit}`, method: "GET" }),
         }),
@@ -36,6 +39,7 @@ export const meronfarmApi = createApi({
 // auto-generated based on the defined endpoints
 export const { 
     useGetAddressBySearchParamsQuery,
+    useGetAddressesByUserIdQuery,
     useGetFavouriteBySearchParamsQuery,
     useGetProductViewedBySearchParamsQuery,
     useGetOrderBySearchParamsQuery,
