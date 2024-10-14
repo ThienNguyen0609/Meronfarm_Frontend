@@ -50,6 +50,10 @@
                     color: var(--primary-color);
                 }
             }
+            .favor-overlay {
+                color: rgba(225, 225, 225, .6) !important;
+                border-color: rgba(225, 225, 225, .6) !important;
+            }
         }
         .overlay-active {
             opacity: 1;

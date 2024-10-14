@@ -6,19 +6,23 @@ import { checkSession, getUserIdSession } from "../../../services/authentication
 import { addFavouriteProduct, addViewedProduct } from "../../../services/meronfarmService";
 import { toastify } from "../../../services/toastify";
 import VerifyPurchaseModal from "./VerifyPurchaseModal/VerifyPurchaseModal";
+import _ from "lodash"
 
 const ProductItem = ({ productItem, classItem, isFavor }) => {
   const [isHover, setIsHover] = useState(false);
   const [isShow, setIsShow] = useState(false);
+  console.log(productItem.favourites)
   const handleAddFavouriteProd = async (prodId) => {
     if(checkSession()) {
-      const request = {
-        userId: getUserIdSession(),
-        productId: prodId
+      if(_.isEmpty(productItem.favourites)) {
+        const request = {
+          userId: getUserIdSession(),
+          productId: prodId
+        }
+        const response = await addFavouriteProduct(request)
+        if(response.status) toastify("success", response.message);
+        else toastify("warning", response.message);
       }
-      const response = await addFavouriteProduct(request)
-      if(response.status) toastify("success", response.message);
-      else toastify("warning", response.message);
     }
     else {
       toastify("warning", "Hãy đăng nhập hoặc tạo tài khoảng");
@@ -57,7 +61,9 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
               onClick={()=>handleAddViewedProd(productItem.id)}
               to={`/product/detail?id=${productItem.id}`} 
             >Chi tiết</Link>
-            {!isFavor && <div className="item-overlay__icon" onClick={()=>handleAddFavouriteProd(productItem.id)}>Thích</div>}
+            {!isFavor && <div className={"item-overlay__icon"+(productItem.favourites && !_.isEmpty(productItem.favourites) ? " favor-overlay" : "")} onClick={()=>handleAddFavouriteProd(productItem.id)}>
+              {productItem.favourites && !_.isEmpty(productItem.favourites) ? "Đã thích":  "Thích"}
+            </div>}
             <div className="item-overlay__icon" onClick={()=>handleShowModal()}>Mua ngay</div>
           </div>
           <div className="item-content">
