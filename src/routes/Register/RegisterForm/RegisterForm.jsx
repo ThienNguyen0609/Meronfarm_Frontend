@@ -7,7 +7,6 @@ import NextForm from "../NextForm/NextForm";
 import { useNavigate } from "react-router-dom";
 import { userCheckEmailOrPhoneNumber, userRegister } from "../../../services/authenticationService";
 import { toastify } from "../../../services/toastify";
-import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -25,7 +24,6 @@ const RegisterForm = () => {
   const [valConfPassword, setValConfPassword] = useState("");
 
   const [proceed, setProceed] = useState(false)
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleCheckUserEmailOrPhoneNumer = async () => {
@@ -64,11 +62,11 @@ const RegisterForm = () => {
       }
       const response = await userRegister(JSON.stringify(request));
       if(response.status) {
-        toastify(true, "success", response.message, dispatch)
+        toastify("success", response.message);
         navigate("/login")
       }
       else {
-        toastify(true, "error", response.message, dispatch)
+        toastify("error", response.message);
       }
     }
   }

@@ -13,7 +13,6 @@ import { useState } from "react";
 import { getSession } from "../../../../services/authenticationService";
 import { addAddress } from "../../../../services/meronfarmService";
 import { toastify } from "../../../../services/toastify";
-import { useDispatch } from "react-redux";
 
 const CreateAddrModal = ({show, setIsShow}) => {
     const [provinceValue, setProvinceValue] = useState("");
@@ -22,7 +21,6 @@ const CreateAddrModal = ({show, setIsShow}) => {
     const [districtId, setDistrictId] = useState(0);
     const [wardValue, setWardValue] = useState("");
     const [addressValue, setAddressValue] = useState("");
-    const dispatch = useDispatch();
 
     const handleSubmit = async () => {
         if(provinceValue.length > 0 && districtValue.length > 0 && wardValue.length > 0 && addressValue.length > 0) {
@@ -34,10 +32,10 @@ const CreateAddrModal = ({show, setIsShow}) => {
             }
             const response = await addAddress(request);
             setIsShow(!show)
-            if(response.status) toastify(true, "success", response.message, dispatch)
-            else toastify(true, "error", response.message, dispatch)
+            if(response.status) toastify("success", response.message);
+            else toastify("error", response.message);
         }
-        else toastify(true, "warning", "Hãy nhập đầy đủ", dispatch)
+        else toastify("warning", "Hãy nhập đầy đủ");
     }
     return (
         <>

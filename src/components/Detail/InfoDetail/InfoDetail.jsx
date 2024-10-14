@@ -6,11 +6,9 @@ import { useState } from "react";
 import { checkSession, getSession } from "../../../services/authenticationService";
 import { addToCart } from "../../../services/meronfarmService";
 import { toastify } from "../../../services/toastify";
-import { useDispatch } from "react-redux";
 
 const InfoDetail = ({product}) => {
   const [count, setCount] = useState(1);
-  const dispatch = useDispatch();
 
   const handleAddToCart = async (cnt) => {
     if(checkSession()) {
@@ -21,12 +19,12 @@ const InfoDetail = ({product}) => {
         productId: product.id
       }
       const response = await addToCart(request);
-      if(response.status === 1) toastify(true, "success", response.message, dispatch)
-      else if(response.status === 0) toastify(true, "error", response.message, dispatch)
-      else toastify(true, "warning", response.message, dispatch)
+      if(response.status === 1) toastify("success", response.message);
+      else if(response.status === 0) toastify("error", response.message);
+      else toastify("warning", response.message);
     }
     else {
-      toastify(true, "warning", "Hãy đăng nhập hoặc tạo tài khoảng", dispatch)
+      toastify("warning", "Hãy đăng nhập hoặc tạo tài khoảng");
     }
   }
   return (

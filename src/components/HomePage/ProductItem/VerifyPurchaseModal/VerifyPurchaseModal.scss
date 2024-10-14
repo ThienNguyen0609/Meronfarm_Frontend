@@ -102,12 +102,75 @@
 
 .pd__summary {
     position: relative;
-    margin-top: 20px;
+    margin: 20px -10px 0;
 
     .pd__summary-font {
-        margin-top: 16px;
+        position: relative;
         font-size: 1rem;
         color: #000000;
+        padding: 8px 10px;
+        transition: all .4s ease;
+    }
+
+    .address-dropdown {
+        position: absolute;
+        display: none;
+        top: 71px;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        z-index: 1;
+        border-radius: 10px;
+        padding: 10px;
+
+        .addrerss-dropdown__title {
+            font-weight: 500;
+            color: rgb(23, 67, 29);
+            margin-right: 5px;
+            font-size: 1.5rem;
+            word-break: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .address-dropdown__list {
+            position: relative;
+            margin: 10px -10px 0;
+            max-height: 128px;
+            overflow: auto;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+
+            .address-dropdown__item {
+                padding: 8px 10px;
+                font-weight: 500;
+                color: rgb(23, 67, 29);
+                font-size: 1rem;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--primary-color-7);
+                }
+            }
+        }
+
+        &::before {
+            position: absolute;
+            content: "";
+            background-color: #ffffff;
+            top: -4px;
+            right: 50px;
+            width: 8px;
+            height: 8px;
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+    }
+
+    .active {
+        display: block;
     }
 
     .pd__total-quantity,
@@ -119,5 +182,11 @@
     .pd__total-price {
         color: #EB403D;
         font-weight: 700;
+    }
+
+    .pd__address-hover:hover {
+        background-color: var(--primary-color-7);
+        border-radius: 6px;
+        cursor: pointer;
     }
 }

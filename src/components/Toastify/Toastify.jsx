@@ -9,7 +9,7 @@ const Toastify = () => {
     const toastRef = useRef(null);
     const dispatch = useDispatch();
 
-    useCreateToast(toastMessage, toastRef, dispatch)
+    useCreateToast(toastMessage, toastRef);
     return (
         <>
         <div ref={toastRef} className="toastify-wrapper">

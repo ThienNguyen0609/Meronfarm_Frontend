@@ -3,7 +3,6 @@ import "./Modal.scss";
 import { useClickOutside } from "../../services/useHooks";
 
 const Modal = ({ children, show, setIsShow }) => {
-  useClickOutside(setIsShow, ".meron-modal-content");
   return (
     <>
       {show && (

@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 import { checkSession, getUserIdSession } from "../../../services/authenticationService";
 import { addFavouriteProduct, addViewedProduct } from "../../../services/meronfarmService";
 import { toastify } from "../../../services/toastify";
-import { useDispatch } from "react-redux";
 import VerifyPurchaseModal from "./VerifyPurchaseModal/VerifyPurchaseModal";
 
 const ProductItem = ({ productItem, classItem, isFavor }) => {
   const [isHover, setIsHover] = useState(false);
   const [isShow, setIsShow] = useState(false);
-  const dispatch = useDispatch();
   const handleAddFavouriteProd = async (prodId) => {
     if(checkSession()) {
       const request = {
@@ -19,11 +17,11 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
         productId: prodId
       }
       const response = await addFavouriteProduct(request)
-      if(response.status) toastify(true, "success", response.message, dispatch);
-      else toastify(true, "warning", response.message, dispatch);
+      if(response.status) toastify("success", response.message);
+      else toastify("warning", response.message);
     }
     else {
-      toastify(true, "warning", "Hãy đăng nhập hoặc tạo tài khoảng", dispatch);
+      toastify("warning", "Hãy đăng nhập hoặc tạo tài khoảng");
     }
   }
   const handleAddViewedProd = async (prodId) => {
@@ -36,9 +34,14 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
       console.log(response)
     }
   }
+
+  const handleShowModal = () => {
+    if(checkSession()) setIsShow(true)
+    else toastify("warning", "Hãy đăng nhập trước khi lựa chọn sản phẩm");
+  }
   return (
     <>
-      <VerifyPurchaseModal show={isShow} setIsShow={setIsShow} productItem={productItem} />
+      {checkSession() && isShow && <VerifyPurchaseModal show={isShow} setIsShow={setIsShow} productItem={productItem} />}
       <div className={"product-item " + classItem}>
         <div className="p-item-content">
           <div className="item-image">
@@ -55,7 +58,7 @@ const ProductItem = ({ productItem, classItem, isFavor }) => {
               to={`/product/detail?id=${productItem.id}`} 
             >Chi tiết</Link>
             {!isFavor && <div className="item-overlay__icon" onClick={()=>handleAddFavouriteProd(productItem.id)}>Thích</div>}
-            <div className="item-overlay__icon" onClick={()=>setIsShow(true)}>Mua ngay</div>
+            <div className="item-overlay__icon" onClick={()=>handleShowModal()}>Mua ngay</div>
           </div>
           <div className="item-content">
             <div className="item-title">

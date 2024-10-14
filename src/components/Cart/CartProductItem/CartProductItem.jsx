@@ -5,18 +5,16 @@ import { faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { removeProductCart } from '../../../services/meronfarmService';
 import { toastify } from '../../../services/toastify';
-import { useDispatch } from 'react-redux';
 
 const CartProductItem = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
   const [quantity, setQuantity] = useState(props.quantity);
-  const dispatch = useDispatch();
 
   const handleRemoveProductCart = async () => {
     const response = await removeProductCart(props.productCartId)
     if(response.status) {
-      toastify(true, "success", response.message, dispatch)
+      toastify("success", response.message);
       props.setLen(l => --l);
       setIsRemove(true)
     }

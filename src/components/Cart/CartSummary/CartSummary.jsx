@@ -3,15 +3,12 @@ import "./CartSummary.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faTag } from '@fortawesome/free-solid-svg-icons';
 import { getUserIdSession } from "../../../services/authenticationService";
-import { addOrderProducts, createOrder } from "../../../services/meronfarmService";
-import { useRandomString } from "../../../services/useHooks";
-import { toastify } from "../../../services/toastify";
+import { useCreateOrder } from "../../../services/useHooks";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addNotification } from "../../../services/meronfarmService";
 import { useGetAddressesByUserIdQuery } from "../../../store/features/meronfarm/meronfarmApi";
-import _ from "lodash";
 import { useEffect, useState } from "react";
+import _ from "lodash";
 import AddressOptionModal from "./AddressOptionModal/AddressOptionModal";
 
 const CartSummary = (props) => {
@@ -20,42 +17,7 @@ const CartSummary = (props) => {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handleCreateOrder = async () => {
-    if(props.productQuantity > 0) {
-      const randomString = useRandomString(20);
-      const concatString = `${import.meta.env.VITE_ORDERCODE_FIRST_STRING}${randomString}`
-      const request = {
-        id: concatString,
-        totalPrice: props.totalPrice,
-        totalQuantity: props.productQuantity,
-        address: address.addr,
-        userId: getUserIdSession()
-      }
-      const response = await createOrder(request);
-      console.log(response)
-      if(response.status) {
-        const nextRequest = props.productOrder.map(item => ({...item, orderId: concatString}))
-        const nextResponse = await addOrderProducts(getUserIdSession(), nextRequest)
-        console.log(nextResponse)
-        if(nextResponse.status) {
-          const nextRequest = {
-            message: "đã đặt đơn hàng",
-            orderId: concatString,
-            receiverId: 1
-          }
-
-          const nextResponse = await addNotification(nextRequest);
-          console.log(nextResponse)
-          props.setProductOrder([])
-          toastify(true, "success", nextResponse.message, dispatch);
-          navigate("/search?CategoryId=all")
-        }
-        else toastify(true, "error", nextResponse.message, dispatch);
-      }
-    }
-    else toastify(true, "warning", "Hãy chọn sản phẩm muốn mua", dispatch);
-  }
+  
   useEffect(() => {
     if(!error && !isLoading && !_.isEmpty(addresses.addresses)) setAddress(...addresses.addresses.filter(item => item.isDefault === true))
   }, [addresses])
@@ -125,7 +87,15 @@ const CartSummary = (props) => {
               {props.totalPrice}đ
             </p>
           </div>
-          <button onClick={()=>handleCreateOrder()} className="cart-summary__btn">Thanh toán ({props.productQuantity} sản phẩm)</button>
+          <button onClick={()=>useCreateOrder(
+            props.productQuantity, 
+            props.totalPrice, 
+            address.addr, 
+            props.productOrder, 
+            props.setProductOrder,
+            dispatch,
+            navigate
+          )} className="cart-summary__btn">Thanh toán ({props.productQuantity} sản phẩm)</button>
         </div>
       </div>
     </>

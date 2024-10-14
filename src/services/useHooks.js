@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { toastify } from './toastify';
+import { getUserIdSession } from './authenticationService';
+import { createOrder, addOrderProducts, addNotification } from './meronfarmService';
 
-const useCreateToast = (toastMessage, toastRef, dispatch) => {
+const useCreateToast = (toastMessage, toastRef) => {
     useEffect(() => {
         if (toastMessage.isShow) {
             const node = document.createElement("div");
@@ -16,7 +18,7 @@ const useCreateToast = (toastMessage, toastRef, dispatch) => {
             setTimeout(() => {
                 toastRef.current.removeChild(node)
             }, 5000)
-            toastify(false, "", "", dispatch)
+            toastify(null, null);
         }
     }, [toastMessage.isShow])
 }
@@ -87,9 +89,45 @@ const useRandomString = (length) => {
     return result;
 }
 
+const useCreateOrder = async (productQuantity, totalPrice, address, productOrder, setProductOrder, navigate) => {
+    if(productQuantity > 0) {
+      const randomString = useRandomString(20);
+      const concatString = `${import.meta.env.VITE_ORDERCODE_FIRST_STRING}${randomString}`
+      const request = {
+        id: concatString,
+        totalPrice: totalPrice,
+        totalQuantity: productQuantity,
+        address: address,
+        userId: getUserIdSession()
+      }
+      const response = await createOrder(request);
+      console.log(response)
+      if(response.status) {
+        const nextRequest = productOrder.map(item => ({...item, orderId: concatString}))
+        const nextResponse = await addOrderProducts(getUserIdSession(), nextRequest)
+        toastify("success", nextResponse.message);
+        if(nextResponse.status) {
+          const nextRequest = {
+            message: "đã đặt đơn hàng",
+            orderId: concatString,
+            receiverId: 1
+          }
+
+          const nextResponse = await addNotification(nextRequest);
+          setProductOrder([])
+          console.log(nextResponse)
+          navigate("/search?CategoryId=all")
+        }
+        else toastify("error", nextResponse.message);
+      }
+    }
+    else toastify("warning", "Hãy chọn sản phẩm muốn mua");
+  }
+
 export {
     useCreateToast,
     useClickOutside,
     useCustomerPage,
-    useRandomString
+    useRandomString,
+    useCreateOrder
 }

@@ -1,12 +1,13 @@
+import store from "../store/store";
 import { setToast } from "../store/features/toastify/toastifySlice";
 
-const toastify = (isShow, type, message, dispatch) => {
+const toastify = (type, message) => {
     const toast = {
-        isShow: isShow,
+        isShow: type !== null && message !== null ? true : false,
         type: type,
         message: message
     }
-    dispatch(setToast(toast))
+    store.dispatch(setToast(toast))
 }
 
 export {

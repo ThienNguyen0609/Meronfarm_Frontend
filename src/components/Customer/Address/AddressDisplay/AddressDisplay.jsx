@@ -10,7 +10,6 @@ import { useGetAddressBySearchParamsQuery } from "../../../../store/features/mer
 import Pagination from "../../../Pagination/Pagination";
 import { removeAddress } from "../../../../services/meronfarmService";
 import { toastify } from "../../../../services/toastify";
-import { useDispatch } from "react-redux";
 
 const AddressDisplay = ({page}) => {
   const { data: addresses, error, isLoading } = useGetAddressBySearchParamsQuery({
@@ -18,13 +17,12 @@ const AddressDisplay = ({page}) => {
     page: parseInt(page), 
     limit: 3
   })
-  const dispatch = useDispatch();
 
   const handleDeleteAddress = async (addressId, isDefault) => {
     if(!isDefault) {
       const response = await removeAddress(addressId);
-      if(response.status) toastify(true, "success", response.message, dispatch)
-      else toastify(true, "error", response.message, dispatch)
+      if(response.status) toastify("success", response.message);
+      else toastify("error", response.message);
     }
   }
   return (

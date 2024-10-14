@@ -7,7 +7,6 @@ import { setSession, userLogin } from "../../../services/authenticationService";
 import { checkValidateLogin } from "../../../services/validateService";
 import { useNavigate } from "react-router-dom";
 import { toastify } from "../../../services/toastify"
-import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
@@ -15,7 +14,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [valPassword, setValPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -28,11 +26,11 @@ const LoginForm = () => {
       const response = await userLogin(JSON.stringify(request));
       if(response.status) {
         setSession(true, response.accessToken, response.user)
-        toastify(true, "success", response.message, dispatch)
+        toastify("success", response.message);
         navigate("/");
       }
       else {
-        toastify(true, "error", response.message, dispatch)
+        toastify("error", response.message);
       }
     }
   }

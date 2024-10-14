@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { addNotification, updateOrder } from "../../../../services/meronfarmService"
 import { toastify } from "../../../../services/toastify"
 import { useClickOutside } from "../../../../services/useHooks";
 
 const OrderManageTableDisplay = ({index, order, orderStatuses, setIsShow, setTotalPrice, setOrderDetail, setAddress}) => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const dispatch = useDispatch();
     useClickOutside(setShowDropdown, ".om-dropdown");
 
     const handleShowOrderDetail = (orderProducts, totalPrice, address) => {
@@ -40,7 +38,7 @@ const OrderManageTableDisplay = ({index, order, orderStatuses, setIsShow, setTot
             // console.log(new Date(nextResponse.dateTime).toLocaleString('en-GB').replace(",", ""))
         }
         else typeResponse = "error"
-        toastify(true, typeResponse, response.message, dispatch)
+        toastify(typeResponse, response.message);
         setShowDropdown(false);
     }
     return (
